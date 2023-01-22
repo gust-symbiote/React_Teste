@@ -1,5 +1,5 @@
 {
-  "name": "lady-debug",
+  "name": "blog-pessoal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,8 +19,9 @@
     "@types/react-dom": "^18.0.9",
     "@types/redux": "3.6.0",
     "axios": "0.21.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "bootstrap": "^5.2.3",
+    "react": "18",
+    "react-dom": "18",
     "react-redux": "7.2.5",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
