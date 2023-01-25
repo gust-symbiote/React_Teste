@@ -166,7 +166,7 @@ function CadastroPost() {
     }
 
     function back() {
-        navigate('/postagens')
+        navigate('/posts')
     }
 
     return (
@@ -199,7 +199,6 @@ function CadastroPost() {
                             ))
                         }
                     </Select>
-                    <Grid></Grid>
                     <InputLabel id="demo-simple-select-helper-label">Usuário </InputLabel>
                     <Select
                         labelId="demo-simple-select-helper-label"
