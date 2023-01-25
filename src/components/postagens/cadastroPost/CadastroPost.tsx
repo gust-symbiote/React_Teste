@@ -8,11 +8,13 @@ import { busca, buscaId, post, put } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 import { toast } from 'react-toastify';
+import User from '../../../models/User';
 
 function CadastroPost() {
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [temas, setTemas] = useState<Tema[]>([])
+    const [users, setUsers] = useState<User[]>([])
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
       );
@@ -41,6 +43,15 @@ function CadastroPost() {
             descricao: '',
             postagem: null
         })
+    const [user, setUser] = useState<User>(
+        {
+            id: 0,
+            nome: '',
+            usuario: '',
+            senha: '',
+            foto: '',
+            postagem: null
+        })
     const [postagem, setPostagem] = useState<Postagem>({
         id: 0,
         titulo: '',
@@ -55,6 +66,13 @@ function CadastroPost() {
             tema: tema
         })
     }, [tema])
+
+    useEffect(() => { 
+        setPostagem({
+            ...postagem,
+            usuario: user
+        })
+    }, [user])
 
     useEffect(() => {
         getTemas()
@@ -71,6 +89,22 @@ function CadastroPost() {
         })
     }
 
+    useEffect(() => {
+        getUsers()
+        if (id !== undefined) {
+            findByIdPostagem(id)
+        }
+    }, [id])
+
+    async function getUsers() {
+        await busca("/usuario", setUsers, {
+            headers: {
+                'Authorization': token
+            }
+        })
+    }
+
+
     async function findByIdPostagem(id: string) {
         await buscaId(`postagens/${id}`, setPostagem, {
             headers: {
@@ -84,9 +118,9 @@ function CadastroPost() {
         setPostagem({
             ...postagem,
             [e.target.name]: e.target.value,
-            tema: tema
+            tema: tema,
+            usuario: user
         })
-
     }
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
@@ -162,8 +196,13 @@ function CadastroPost() {
                                 <MenuItem value={tema.id}>{tema.descricao}</MenuItem>
                             ))
                         }
+                            {
+                            users.map(user => (
+                                <MenuItem value={user.id}>{user.nome}</MenuItem>
+                            ))
+                        }
                     </Select>
-                    <FormHelperText>Escolha um tema para a postagem</FormHelperText>
+                    <FormHelperText>Escolha um tema E usuário para a postagem</FormHelperText>
                     <Button type="submit" variant="contained" color="primary">
                         Finalizar
                     </Button>
