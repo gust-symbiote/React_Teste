@@ -43,6 +43,7 @@ function CadastroPost() {
             descricao: '',
             postagem: null
         })
+    
     const [user, setUser] = useState<User>(
         {
             id: 0,
@@ -52,6 +53,7 @@ function CadastroPost() {
             foto: '',
             postagem: null
         })
+    
     const [postagem, setPostagem] = useState<Postagem>({
         id: 0,
         titulo: '',
@@ -196,13 +198,23 @@ function CadastroPost() {
                                 <MenuItem value={tema.id}>{tema.descricao}</MenuItem>
                             ))
                         }
-                            {
+                    </Select>
+                    <InputLabel id="demo-simple-select-helper-label">Usuário </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="demo-simple-select-helper"
+                        onChange={(e) => buscaId(`/tema/${e.target.value}`, setUser, {
+                            headers: {
+                                'Authorization': token
+                            }
+                        })}>
+                        {
                             users.map(user => (
                                 <MenuItem value={user.id}>{user.nome}</MenuItem>
                             ))
                         }
                     </Select>
-                    <FormHelperText>Escolha um tema E usuário para a postagem</FormHelperText>
+                    <FormHelperText>Escolha um tema e usuário para a postagem</FormHelperText>
                     <Button type="submit" variant="contained" color="primary">
                         Finalizar
                     </Button>
