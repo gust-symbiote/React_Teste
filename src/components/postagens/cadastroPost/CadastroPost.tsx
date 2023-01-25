@@ -99,7 +99,7 @@ function CadastroPost() {
     }, [id])
 
     async function getUsers() {
-        await busca("/usuario", setUsers, {
+        await busca("/usuarios", setUsers, {
             headers: {
                 'Authorization': token
             }
@@ -199,11 +199,12 @@ function CadastroPost() {
                             ))
                         }
                     </Select>
+                    <Grid></Grid>
                     <InputLabel id="demo-simple-select-helper-label">Usuário </InputLabel>
                     <Select
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
-                        onChange={(e) => buscaId(`/tema/${e.target.value}`, setUser, {
+                        onChange={(e) => buscaId(`/usuarios/${e.target.value}`, setUser, {
                             headers: {
                                 'Authorization': token
                             }
@@ -214,7 +215,7 @@ function CadastroPost() {
                             ))
                         }
                     </Select>
-                    <FormHelperText>Escolha um tema e usuário para a postagem</FormHelperText>
+                    <FormHelperText>Escolha um tema e usuário para finalizar</FormHelperText>
                     <Button type="submit" variant="contained" color="primary">
                         Finalizar
                     </Button>
